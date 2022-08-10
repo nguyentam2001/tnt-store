@@ -25,6 +25,4 @@ public class AddressController {
             CommonView.displayMessage(Resources.ADD_FAIL_MSG);
         }
     }
-
-
 }
