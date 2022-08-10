@@ -22,4 +22,9 @@ public class AddressServiceImpl implements AddressService {
     public int add(Address address) {
         return 0;
     }
+
+    @Override
+    public int test() {
+        return 0;
+    }
 }
