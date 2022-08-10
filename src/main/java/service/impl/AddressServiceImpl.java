@@ -17,14 +17,4 @@ public class AddressServiceImpl implements AddressService {
         else
         return addressDAO.save(address)>0;
     }
-
-    @Override
-    public int add(Address address) {
-        return 0;
-    }
-
-    @Override
-    public int test() {
-        return 0;
-    }
 }
