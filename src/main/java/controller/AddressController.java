@@ -8,6 +8,7 @@ import view.CommonView;
 import view.address.AddressView;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.List;
 import java.util.Scanner;
 
@@ -82,9 +83,19 @@ public class AddressController {
 
     public  void  updateAddressController(){
         //nhập id muốn update
-        int id=CommonView.getInstance().inputId("Address");
-        address = AddressView.inputAddress();
-        boolean result= addressService.update(id,address);
+        boolean isCon=true;
+        do {
+            int id=CommonView.getInstance().inputId("Address");
+            address = AddressView.inputAddress();
+            boolean result= addressService.update(id,address);
+            if(result){
+                CommonView.getInstance().displayMessage(Resources.UPDATE_SUCCESS_MSG);
+            }else{
+                CommonView.getInstance().displayMessage(Resources.UPDATE_FAIL_MSG);
+            }
+            isCon=Main.isContinue();
+        }while (isCon);
+
     }
 
 }

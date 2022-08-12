@@ -4,7 +4,7 @@ import dao.AddressDAO;
 import model.Address;
 import util.DBUtil;
 import util.Resources;
-import view.CommonView;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,18 +32,11 @@ public class AddressDAOImpl implements AddressDAO {
 
     @Override
     public int delete(int id) {
-        try (Connection connection = DBUtil.getInstance().getConnection();
-             Statement statement = connection.createStatement();
+        try (Connection connection = DBUtil.getInstance().getConnection()
         ) {
-            String sql_select = Resources.SELECT_ADDRESS_BY_ID + id;
-            ResultSet rs = statement.executeQuery(sql_select);
-            if (rs.next()) {
-                String sql = Resources.DELETE_ADDRESS_BY_ID + id;
-                statement.executeUpdate(sql);
-            } else {
-                CommonView.getInstance().displayMessage("Do not address has id is " + id);
-            }
-            rs.close();
+            String sql = Resources.DELETE_ADDRESS_BY_ID + id;
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            return preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -58,7 +51,7 @@ public class AddressDAOImpl implements AddressDAO {
             ResultSet resultSet = statement.executeQuery(sql);
             List<Address> addresses = new ArrayList<>();
             while (resultSet.next()) {
-                Address address= (Address)DBUtil.getInstance().columnBinding(new Address(),resultSet);
+                Address address = (Address) DBUtil.getInstance().columnBinding(new Address(), resultSet);
                 addresses.add(address);
             }
             return addresses;
@@ -69,18 +62,18 @@ public class AddressDAOImpl implements AddressDAO {
     }
 
     @Override
-    public Address getAddressById(int id) {
+    public Address getById(int id) {
         try (Connection connection = DBUtil.getInstance().getConnection();
-             Statement statement = connection.createStatement();
+             Statement statement = connection.createStatement()
         ) {
             String sql_select = Resources.SELECT_ADDRESS_BY_ID + id;
             ResultSet resultSet = statement.executeQuery(sql_select);
-            while ( resultSet.next()){
-                Address address= (Address)DBUtil.getInstance().columnBinding(new Address(),resultSet);
-                return  address;
+            Address address;
+           if(resultSet.next()) {
+               address= (Address) DBUtil.getInstance().columnBinding(new Address(), resultSet);
+                return address;
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -88,7 +81,18 @@ public class AddressDAOImpl implements AddressDAO {
 
     @Override
     public int update(int id, Address address) {
-
+        try (Connection connection = DBUtil.getInstance().getConnection()
+        ) {
+            String sql = Resources.UPDATE_ADDRESS;
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement = DBUtil.getInstance().statementBinding(preparedStatement,
+                    address.getCity(), address.getDistrict(), address.getSubDistrict(), address.getPostalCode(), address.getDeliveryFree(), id);
+            if (preparedStatement != null) {
+                return preparedStatement.executeUpdate();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 }

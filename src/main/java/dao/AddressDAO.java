@@ -4,14 +4,6 @@ import model.Address;
 
 import java.util.List;
 
-public interface AddressDAO {
-    int save(Address address);
+public interface AddressDAO extends  CommonDAO<Address> {
 
-    int delete(int id);
-
-    List<Address> findAll();
-
-    Address getAddressById(int id);
-
-    int update(int id, Address address);
 }

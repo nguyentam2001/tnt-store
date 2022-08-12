@@ -32,7 +32,7 @@ public class CommonView {
     }
 
     public int inputId(String name) {
-        System.out.println("Enter " + name + "id");
+        System.out.print("Enter " + name + " id: ");
         if(scanner.hasNextInt()){
             int id = scanner.nextInt();
             scanner.nextLine();
