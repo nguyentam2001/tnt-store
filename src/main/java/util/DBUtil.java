@@ -1,6 +1,7 @@
 package util;
 
 import model.Address;
+import model.Customer;
 
 import java.sql.*;
 
@@ -54,6 +55,14 @@ public class DBUtil {
                 Long deliveryFee = resultSet.getLong("DELIVERY_FEE");
                 Address address= new Address(id, city, district, subDistrict, postalCode, deliveryFee);
                 return  address;
+        }else if(object instanceof Customer){
+                int id= resultSet.getInt("CUSTOMER_ID");
+                String fullName= resultSet.getString("FULL_NAME");
+                String phoneNumber= resultSet.getString("PHONE_NUMBER");
+                String email= resultSet.getString("EMAIL");
+                int address=resultSet.getInt("ADDRESS_ID");
+                Customer customer= new Customer(id,fullName,phoneNumber,email,address);
+                return  customer;
         }
         } catch (SQLException e) {
             throw new RuntimeException(e);
