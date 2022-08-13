@@ -3,11 +3,8 @@ import dao.CustomerDAO;
 import model.Customer;
 import util.DBUtil;
 import util.Resources;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import view.CommonView;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,8 +30,8 @@ public class CustomerDAOImpl implements CustomerDAO {
             String sql= Resources.DELETE_CUSTOMER+id;
             PreparedStatement preparedStatement= connection.prepareStatement(sql);
             return  preparedStatement.executeUpdate();
-        }catch (Exception e){
-            e.printStackTrace();
+        }catch (SQLException e){
+           CommonView.getInstance().displayMessage(e.getMessage());
         }
         return 0;
     }
@@ -50,7 +47,7 @@ public class CustomerDAOImpl implements CustomerDAO {
                 customers.add(customer);
             }
             return customers;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
@@ -65,7 +62,7 @@ public class CustomerDAOImpl implements CustomerDAO {
                 Customer customer= (Customer) DBUtil.getInstance().columnBinding(new Customer(),resultSet);
                 return  customer;
             }
-        }catch (Exception e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
         return null;
@@ -80,7 +77,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             if(preparedStatement!=null){
                 return  preparedStatement.executeUpdate();
             }
-        }catch (Exception e){
+        }catch (SQLException e){
             e.printStackTrace();
         }
         return 0;
