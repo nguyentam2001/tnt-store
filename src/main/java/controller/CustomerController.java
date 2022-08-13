@@ -43,18 +43,48 @@ public class CustomerController {
     }
 
     private void findCustomerByIdController() {
+        int id= CommonView.getInstance().inputId("customer");
+        Customer customer= customerService.getCustomerById(id);
+        if(customer!=null){
+            CustomerView.getInstance().titleCustomer();
+            Address address = addressService.getAddressById(customer.getAddressId());
+            CustomerView.getInstance().printCustomer(customer,address);
+        }
     }
 
     private void deleteCustomerController() {
-
+        int id= CommonView.getInstance().inputId("customer");
+        Customer customer= customerService.getCustomerById(id);
+        if(customer!=null){
+            customerService.delete(id);
+            CommonView.getInstance().displayMessage(Resources.DELETE_SUCCESS_MSG);
+        }
     }
 
     private void updateCustomerController() {
-
+        int id= CommonView.getInstance().inputId("customer");
+        Customer customer= customerService.getCustomerById(id);
+        if(customer!=null){
+            List<Address> addresses= addressService.findAll();
+            customer=CustomerView.getInstance().inputCustomer(addresses);
+            boolean result =customerService.update(id,customer);
+            if(result){
+                CommonView.getInstance().displayMessage(Resources.UPDATE_SUCCESS_MSG);
+            }else {
+                CommonView.getInstance().displayMessage(Resources.UPDATE_FAIL_MSG);
+            }
+        }
     }
 
     private void printAllCustomerController() {
-
+        List<Customer> customers= customerService.findAll();
+        CustomerView.getInstance().titleCustomer();
+        for (Customer customer:
+             customers) {
+            Address address = addressService.getAddressById(customer.getAddressId());
+            CustomerView.getInstance().printCustomer(customer,address);
+        }
+        CustomerView.getInstance().printLineCustomer();
     }
 
     private void saveCustomerController() {

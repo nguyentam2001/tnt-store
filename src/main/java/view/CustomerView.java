@@ -33,4 +33,21 @@ public class CustomerView {
         scanner.nextLine();
         return  customer;
     }
+
+    public void titleCustomer() {
+        printLineCustomer();
+        System.out.printf("| %10s | %20s | %20s | %20s | %20s |\n", "CUSTOMER_ID", "CUSTOMER_NAME",
+                "EMAIL", "PHONE_NUMBER", "CITY_ADDRESS");
+        printLineCustomer();
+    }
+
+    public   void  printLineCustomer(){
+        System.out.println("--------------------------------------------------------------------" +
+                "---------------------------------------");
+    }
+
+
+    public void printCustomer(Customer customer,Address address) {
+        System.out.printf("| %10d  | %20s | %20s | %20s | %20s |\n", customer.getCustomerId(), customer.getFullName(), customer.getEmail(),customer.getPhoneNumber(),address.getCity());
+    }
 }

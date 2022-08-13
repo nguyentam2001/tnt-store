@@ -5,4 +5,5 @@ import model.Address;
 import java.util.List;
 
 public interface AddressService extends CommonService<Address> {
+    Address getAddressById(int id);
 }
