@@ -1,7 +1,7 @@
-package view.address;
+package view;
 
 import model.Address;
-
+import java.util.List;
 import java.util.Scanner;
 
 public class AddressView {
@@ -28,15 +28,7 @@ public class AddressView {
         return address;
     }
 
-    public static void printViewAddress() {
-        System.out.println("\t============== Address ============");
-        System.out.println("\t1. Create new address");
-        System.out.println("\t2. Print addresses");
-        System.out.println("\t3. Update address");
-        System.out.println("\t4. delete address");
-        System.out.println("\t0. Exit to main menu");
-        System.out.println("\t===================================");
-    }
+
 
     public static void titleAddress() {
         printLineAddress();
@@ -56,5 +48,10 @@ public class AddressView {
                 , address.getSubDistrict(), address.getPostalCode(), address.getDeliveryFree());
     }
 
+    public  static  void  printAddress(List<Address> addresses){
+        System.out.println("===========Address==========");
+        addresses.forEach(System.out::println);
+        System.out.println("============================");
+    }
 
 }

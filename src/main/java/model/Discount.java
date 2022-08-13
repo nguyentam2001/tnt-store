@@ -10,6 +10,9 @@ public class Discount {
     private LocalDate startDate;
     private LocalDate endDate;
 
+    public Discount() {
+    }
+
     public Discount(int discountId, String title, String type, double discountPrice, LocalDate startDate, LocalDate endDate) {
         this.discountId = discountId;
         this.title = title;
