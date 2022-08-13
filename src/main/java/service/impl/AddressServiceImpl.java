@@ -7,7 +7,6 @@ import service.AddressService;
 import util.Resources;
 import util.Validator;
 import view.CommonView;
-import view.address.AddressView;
 
 import java.util.List;
 

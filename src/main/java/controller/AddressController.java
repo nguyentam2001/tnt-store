@@ -5,12 +5,9 @@ import service.AddressService;
 import service.impl.AddressServiceImpl;
 import util.Resources;
 import view.CommonView;
-import view.address.AddressView;
+import view.AddressView;
 
-import java.io.IOException;
-import java.sql.Connection;
 import java.util.List;
-import java.util.Scanner;
 
 public class AddressController {
     private static AddressService addressService;
@@ -29,7 +26,7 @@ public class AddressController {
     public  void  menuAddressController(){
             int pick=0;
             do {
-                AddressView.printViewAddress();
+               CommonView.getInstance().printSubMenu("address");
                 pick=Main.scanner.nextInt();
                 switch (pick){
                     case 1:saveAddressController(); break;

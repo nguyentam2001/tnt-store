@@ -17,7 +17,8 @@ public class Main {
             CommonView.getInstance().mainMenu();
             pick=scanner.nextInt();
             switch (pick){
-                case 1: AddressController.getInstance().menuAddressController();
+                case 1: AddressController.getInstance().menuAddressController(); break;
+                case 2:CustomerController.getInstance().customerMenuController(); break;
             }
         }while (pick!=0);
     }

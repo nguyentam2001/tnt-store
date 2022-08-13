@@ -67,4 +67,9 @@ public class Address {
     public void setDeliveryFree(long deliveryFree) {
         this.deliveryFree = deliveryFree;
     }
+
+    @Override
+    public String toString() {
+        return String.format("| %6d | %10s | %10d |",getAddressId(),getCity(),getDeliveryFree());
+    }
 }

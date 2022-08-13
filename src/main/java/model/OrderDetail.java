@@ -7,6 +7,9 @@ public class OrderDetail {
     private  int orderId;
     private  int productId;
 
+    public OrderDetail() {
+    }
+
     public OrderDetail(int cardId, int quantity, long total, int orderId, int productId) {
         this.cardId = cardId;
         this.quantity = quantity;

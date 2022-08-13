@@ -1,5 +1,6 @@
 package view;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class CommonView {
@@ -29,6 +30,16 @@ public class CommonView {
         System.out.println("6. Product management ");
         System.out.println("0. Exit");
         System.out.println("======================================================");
+    }
+
+    public void printSubMenu(String name) {
+        System.out.println("\t============== "+name.toUpperCase()+" ============");
+        System.out.println("\t1. Create new "+name);
+        System.out.println("\t2. Print all "+name);
+        System.out.println("\t3. Update "+name);
+        System.out.println("\t4. delete "+name);
+        System.out.println("\t0. Exit to main menu");
+        System.out.println("\t===================================");
     }
 
     public int inputId(String name) {
