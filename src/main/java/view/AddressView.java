@@ -1,6 +1,8 @@
 package view;
 
 import model.Address;
+import util.Validator;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,21 +12,14 @@ public class AddressView {
 
     public static Address inputAddress() {
         System.out.print("\tEnter city: ");
-        String city = scanner.nextLine();
-        address.setCity(city);
+        address.setCity(scanner.nextLine());
         System.out.print("\tEnter district: ");
-        String district = scanner.nextLine();
-        address.setDistrict(district);
+        address.setDistrict(scanner.nextLine());
         System.out.print("\tEnter sub district: ");
-        String subDistrict = scanner.nextLine();
-        address.setSubDistrict(subDistrict);
+        address.setSubDistrict(scanner.nextLine());
         System.out.print("\tEnter postal code: ");
-        String postalCode = scanner.nextLine();
-        address.setPostalCode(postalCode);
-        System.out.print("\tEnter delivery free: ");
-        long deliveryFree = scanner.nextLong();
-        scanner.nextLine();
-        address.setDeliveryFree(deliveryFree);
+        address.setPostalCode(scanner.nextLine());
+        address.setDeliveryFree(Validator.getInstance().moneyValidate(" delivery free"));
         return address;
     }
 

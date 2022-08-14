@@ -35,7 +35,6 @@ public class CustomerController {
                 case 3:updateCustomerController();break;
                 case 4:deleteCustomerController(); break;
                 case 5:findCustomerByIdController();break;
-
                 default: break;
             }
 

@@ -30,9 +30,10 @@ public class Resources {
     public static final String SELECT_CUSTOMER_BY_ID = "SELECT * FROM CUSTOMER WHERE CUSTOMER_ID = ";
     public static final String DELETE_CUSTOMER = "DELETE CUSTOMER WHERE CUSTOMER_ID = ";
     public static final String UPDATE_CUSTOMER = "UPDATE CUSTOMER SET " + " FULL_NAME = ? " + ", PHONE_NUMBER = ? "
-            + ", EMAIL = ? " + ", ADDRESS_ID= ? " + "WHERE ADDRESS_ID = ?";
+            + ", EMAIL = ? " + ", ADDRESS_ID= ? " + "WHERE CUSTOMER_ID = ?";
 
     //Regex
     public static final String EMAIL_REGEX = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
 
+    public static final String PHONE_REGEX = "^[0]+[0-9]{9}$";
 }
