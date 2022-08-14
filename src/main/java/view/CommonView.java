@@ -21,14 +21,9 @@ public class CommonView {
     }
 
     public void mainMenu() {
-        System.out.println("==========================TNT STORE===================");
-        System.out.println("1. Address management ");
-        System.out.println("2. Customer management ");
-        System.out.println("3. Discount management ");
-        System.out.println("4. Order management ");
-        System.out.println("5. Order detail management ");
-        System.out.println("6. Product management ");
-        System.out.println("0. Exit");
+        System.out.println("==================WELCOME TO TNT STORE================");
+        System.out.println("1. Order product ");
+        System.out.println("2. Login width admin ");
         System.out.println("======================================================");
     }
 
@@ -53,4 +48,23 @@ public class CommonView {
     }
 
 
+    public void customerMenu() {
+        System.out.println("===================TNT STORE===============");
+        System.out.println("1: Order product");
+        System.out.println("2: Check receipt");
+        System.out.println("0: Exist");
+        System.out.println("===========================================");
+    }
+
+    public void managementMenuMenu() {
+        System.out.println("==========================TNT STORE===================");
+        System.out.println("1. Address management ");
+        System.out.println("2. Customer management ");
+        System.out.println("3. Discount management ");
+        System.out.println("4. Order management ");
+        System.out.println("5. Order detail management ");
+        System.out.println("6. Product management ");
+        System.out.println("0. Exit");
+        System.out.println("======================================================");
+    }
 }

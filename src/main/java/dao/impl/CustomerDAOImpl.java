@@ -56,7 +56,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     public Customer getById(int id) {
         try(Connection connection= DBUtil.getInstance().getConnection();
             Statement statement= connection.createStatement()){
-            String sql= Resources.SELECT_CUSTOMER_BY_ID;
+            String sql= Resources.SELECT_CUSTOMER_BY_ID+id;
             ResultSet resultSet= statement.executeQuery(sql);
             if(resultSet.next()){
                 Customer customer= (Customer) DBUtil.getInstance().columnBinding(new Customer(),resultSet);
@@ -70,7 +70,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     @Override
     public int update(int id, Customer customer) {
         try(Connection connection= DBUtil.getInstance().getConnection()) {
-            String sql= Resources.UPDATE_CUSTOMER+id;
+            String sql= Resources.UPDATE_CUSTOMER;
             PreparedStatement preparedStatement=connection.prepareStatement(sql);
             preparedStatement= DBUtil.getInstance().statementBinding(preparedStatement,
                     customer.getFullName(),customer.getPhoneNumber(),customer.getEmail(),customer.getAddressId(),id);

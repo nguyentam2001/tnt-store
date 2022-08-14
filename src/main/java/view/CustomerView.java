@@ -1,10 +1,7 @@
 package view;
-
 import model.Address;
 import model.Customer;
-import service.CustomerService;
 import util.Validator;
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,14 +18,13 @@ public class CustomerView {
     }
 
     public  Customer inputCustomer(List<Address> addresses) {
-        System.out.print("Enter full name: ");
+        System.out.print("\tEnter full name: ");
         customer.setFullName(scanner.nextLine());
-        System.out.print("Enter phone number: ");
-        customer.setPhoneNumber(scanner.nextLine());
+        customer.setPhoneNumber(Validator.getInstance().phoneValidate());
         customer.setEmail(Validator.getInstance().emailValidate());
-        System.out.println("Choose id address");
+        System.out.println("\tChoose id address");
         AddressView.printAddress(addresses);
-        System.out.println("Enter address id: ");
+        System.out.print("\tEnter address id: ");
         customer.setAddressId(scanner.nextInt());
         scanner.nextLine();
         return  customer;
