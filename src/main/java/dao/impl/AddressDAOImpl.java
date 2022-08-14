@@ -4,12 +4,10 @@ import dao.AddressDAO;
 import model.Address;
 import util.DBUtil;
 import util.Resources;
+import view.CommonView;
 
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class AddressDAOImpl implements AddressDAO {
             if (preparedStatement != null) {
                 return preparedStatement.executeUpdate();
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return 0;
@@ -37,8 +35,8 @@ public class AddressDAOImpl implements AddressDAO {
             String sql = Resources.DELETE_ADDRESS_BY_ID + id;
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             return preparedStatement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+          CommonView.getInstance().displayMessage(e.getMessage());
         }
         return 0;
     }
@@ -55,7 +53,7 @@ public class AddressDAOImpl implements AddressDAO {
                 addresses.add(address);
             }
             return addresses;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
@@ -73,7 +71,7 @@ public class AddressDAOImpl implements AddressDAO {
                address= (Address) DBUtil.getInstance().columnBinding(new Address(), resultSet);
                 return address;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
@@ -90,7 +88,7 @@ public class AddressDAOImpl implements AddressDAO {
             if (preparedStatement != null) {
                 return preparedStatement.executeUpdate();
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return 0;
