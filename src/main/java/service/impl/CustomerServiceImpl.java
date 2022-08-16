@@ -63,8 +63,18 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer getCustomerById(int id) {
         Customer customer= customerDAO.getById(id);
         if(customer==null){
-            CommonView.getInstance().displayMessage(Resources.CUSTOMER_NOT_EXIST+id);
+            CommonView.getInstance().displayMessage(Resources.CUSTOMER_NOT_EXIST+"with id = "+id);
         }
         return  customer;
     }
+
+    @Override
+    public Customer getCustomerByPhone(String phone) {
+        Customer customer= customerDAO.getCustomerByPhone(phone);
+        if(customer==null){
+            CommonView.getInstance().displayMessage(Resources.CUSTOMER_NOT_EXIST+"with phone = "+phone);
+        }return  customer;
+    }
+
+
 }

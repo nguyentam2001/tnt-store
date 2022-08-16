@@ -1,40 +1,40 @@
-package view.order;
+
+package view;
 
 import model.Address;
 import model.Order;
+import util.Validator;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 public class OrderView {
     private static Scanner scanner=new Scanner(System.in);;
     private static Order order= new Order();;
 
-    public static Order inputOrder() {
+    public static Order inputOrder(List<Address> addresses) {
         System.out.print("\tEnter name: ");
-        String name = scanner.nextLine();
-        order.setName(name);
+        order.setName(scanner.nextLine());
         System.out.print("\tEnter phone number: ");
-        String phoneNumber = scanner.nextLine();
-        order.setPhoneNumber(phoneNumber);
-        System.out.print("\tEnter detail address: ");
-        String detailAddress = scanner.nextLine();
-        order.setDetailAddress(detailAddress);
-        System.out.print("\tEnter total: ");
-        int total = scanner.nextInt();
-        order.setTotal(total);
-        System.out.print("\tEnter local date: ");
-        LocalDate date = LocalDate.parse(scanner.nextLine());
-        order.setOrderDate(date);
-        System.out.print("\tEnter customerID: ");
-        int customerID = scanner.nextInt();
-        order.setCustomerId(customerID);
+        order.setPhoneNumber(scanner.nextLine());
+        System.out.println("\tChoose id address");
+        AddressView.printAddress(addresses);
         System.out.print("\tEnter addressID: ");
-        int addressID = scanner.nextInt();
-        order.setAddressId(addressID);
+        order.setAddressId(scanner.nextInt());
+        scanner.nextLine();
+        System.out.print("\tEnter detail address: ");
+        order.setDetailAddress(scanner.nextLine());
+        System.out.print("\tEnter total: ");
+        order.setTotal( scanner.nextInt());
+        System.out.print("\tEnter local date: ");
+        order.setOrderDate(Validator.getInstance().inputDate());
+        System.out.print("\tEnter customerID: ");
+        order.setCustomerId(scanner.nextInt());
+        scanner.nextLine();
         System.out.print("\tEnter discountID: ");
-        int discountID = scanner.nextInt();
-        order.setDiscountId(discountID);
+        order.setDiscountId(scanner.nextInt());
+        scanner.nextLine();
         return order;
     }
 
@@ -50,19 +50,23 @@ public class OrderView {
 
     public static void titleOrder() {
         printLineOrder();
-        System.out.printf("| %10s | %15s | %15s | %15s | %15s | %15s | %15s| %15s | %15s |\n", "ORDER_ID", "NAME",
-                "PHONE_NUMBER", "DETAIL_ADDRESS", "TOTAL", "ORDER_DATE", "CUSTOMER_ID", "DISCOUNT_ID","ADDRESS_ID");
+        System.out.printf("| %10s | %15s | %15s | %15s | %15s | %35s | %15s | %15s | %15s |\n", "ORDER_ID", "NAME",
+                "PHONE_NUMBER","ORDER_DATE",  "TOTAL", "DETAIL_ADDRESS", "CUSTOMER_ID", "DISCOUNT_ID","ADDRESS_ID");
         printLineOrder();
     }
 
     public  static  void  printLineOrder(){
         System.out.println("--------------------------------------------------------------------" +
-                "------------------------------------");
+                "------------------------------------" +
+                "------------------------------------" +
+                "-------------------" +
+                "-------------------");
     }
 
 
     public static void printOrder(Order order) {
-        System.out.printf("| %10d | %15s | %15s | %15s | %15s | %15s | %15s | %15s | %15d |\n", order.getOrderId(),order.getName(),order.getPhoneNumber()
+        System.out.printf("| %10d | %15s | %15s | %15s | %15s | %35s | %15s | %15s | %15s |\n", order.getOrderId()
+                ,order.getName(),order.getPhoneNumber()
         ,order.getOrderDate(),order.getTotal(),order.getDetailAddress(),order.getCustomerId(),
                 order.getAddressId(),order.getDiscountId());
     }

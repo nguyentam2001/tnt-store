@@ -5,7 +5,7 @@ import service.DiscountService;
 import service.impl.DiscountServiceImpl;
 import util.Resources;
 import view.CommonView;
-import view.discount.DiscountView;
+import view.DiscountView;
 
 import java.util.List;
 

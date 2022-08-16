@@ -1,3 +1,4 @@
+
 package controller;
 
 import model.Address;
@@ -8,19 +9,23 @@ import service.impl.AddressServiceImpl;
 import service.impl.OrderServiceImpl;
 import util.Resources;
 import view.CommonView;
-import view.address.AddressView;
-import view.order.OrderView;
+import view.OrderView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderController {
-    private static OrderService orderService;
-    private static Order order;
+    private  OrderService orderService;
+    private  Order order;
     private  static  OrderController instance;
+    private   AddressService addressService;
+
 
     public OrderController() {
         order = new Order();
         orderService = new OrderServiceImpl();
+        addressService = new AddressServiceImpl();
+
     }
 
     public static   OrderController  getInstance(){
@@ -50,7 +55,7 @@ public class OrderController {
     public  void saveOrderController() {
         boolean isCon;
         do {
-            order = OrderView.inputOrder();
+            order = OrderView.inputOrder(addressService.findAll());
             boolean result=orderService.save(order);
             if(result){
                 CommonView.getInstance().displayMessage(Resources.ADD_SUCCESS_MSG);
@@ -85,9 +90,10 @@ public class OrderController {
     public  void  updateOrderController(){
         //nhập id muốn update
         boolean isCon=true;
+
         do {
             int id=CommonView.getInstance().inputId("Order");
-            order = OrderView.inputOrder();
+            order = OrderView.inputOrder(addressService.findAll());
             boolean result= orderService.update(id,order);
             if(result){
                 CommonView.getInstance().displayMessage(Resources.UPDATE_SUCCESS_MSG);

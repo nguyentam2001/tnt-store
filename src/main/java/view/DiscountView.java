@@ -1,6 +1,8 @@
-package view.discount;
+
+package view;
 
 import model.Discount;
+import util.Validator;
 
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -10,24 +12,17 @@ public class DiscountView {
     private static Discount discount= new Discount();;
 
     public static Discount inputDiscount() {
-        System.out.print("\tEnter discount ID: ");
-        int discount_id = scanner.nextInt();
-        discount.setDiscountId(discount_id);
         System.out.print("\tEnter title: ");
-        String title = scanner.nextLine();
-        discount.setTitle(title);
+        discount.setTitle(scanner.nextLine());
         System.out.print("\tEnter type: ");
-        String type = scanner.nextLine();
-        discount.setType(type);
+        discount.setType(scanner.nextLine());
         System.out.print("\tEnter discountPrice: ");
-        Double discountPrice = scanner.nextDouble();
-        discount.setDiscountPrice(discountPrice);
+        discount.setDiscountPrice(scanner.nextDouble());
+        scanner.nextLine();
         System.out.print("\tEnter start date: ");
-        LocalDate startDate = LocalDate.parse(scanner.nextLine());
-        discount.setStartDate(startDate);
+        discount.setStartDate(Validator.getInstance().inputDate());
         System.out.print("\tEnter end date: ");
-        LocalDate endDate = LocalDate.parse(scanner.nextLine());
-        discount.setEndDate(endDate);
+        discount.setEndDate(Validator.getInstance().inputDate());
         return discount;
     }
 
@@ -56,7 +51,7 @@ public class DiscountView {
 
     public static void printDiscount(Discount discount) {
 
-        System.out.printf("| %10d | %15s | %15s | %15s | %15s | %15d |\n", discount.getDiscountId(),
+        System.out.printf("| %10d  | %15s | %15s | %15s | %15s | %15s |\n", discount.getDiscountId(),
                 discount.getTitle(),discount.getType(),discount.getDiscountPrice()
                 ,discount.getStartDate(),discount.getEndDate());
     }

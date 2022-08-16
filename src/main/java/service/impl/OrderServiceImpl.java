@@ -1,8 +1,8 @@
+
 package service.impl;
 
 import dao.OrderDAO;
 import dao.impl.OrderDAOImpl;
-import model.Address;
 import model.Order;
 import service.OrderService;
 import util.Resources;
@@ -51,3 +51,4 @@ public class OrderServiceImpl implements OrderService {
         return false;
     }
 }
+
