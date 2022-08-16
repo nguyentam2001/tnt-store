@@ -5,7 +5,6 @@ import service.impl.AddressServiceImpl;
 import util.Resources;
 import util.Validator;
 import view.CommonView;
-
 import java.util.Scanner;
 
 
@@ -40,8 +39,8 @@ public class Main {
         }while (pick!=0);
     }
 
-    public  static  void  managementMenuController(){
-        if(Validator.getInstance().Login()){
+    public  static  void  managementMenuController(){//các chức năng quan lý
+        //if(Validator.getInstance().Login()){
             int pick=0;
             do {
 
@@ -49,10 +48,12 @@ public class Main {
                 pick=scanner.nextInt();
                 switch (pick){
                     case 1: AddressController.getInstance().menuAddressController(); break;
-                    case 2:CustomerController.getInstance().customerMenuController(); break;
+                    case 2: CustomerController.getInstance().customerMenuController(); break;
+                    case 3:DiscountController.getInstance().menuDiscountController(); break;
+                    case 4:OrderController.getInstance().menuOrderController(); break;
                 }
             }while (pick!=0);
-        }
+       // }
     }
 
     public  static boolean isContinue(){

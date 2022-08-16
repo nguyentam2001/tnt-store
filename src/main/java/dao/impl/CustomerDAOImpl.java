@@ -82,4 +82,20 @@ public class CustomerDAOImpl implements CustomerDAO {
         }
         return 0;
     }
+
+    @Override
+    public Customer getCustomerByPhone(String phone) {
+        try(Connection connection= DBUtil.getInstance().getConnection();
+            Statement statement= connection.createStatement()){
+            String sql= Resources.SELECT_CUSTOMER_BY_PHONE+phone;
+            ResultSet resultSet=statement.executeQuery(sql);
+            if(resultSet.next()){
+                Customer customer= (Customer) DBUtil.getInstance().columnBinding(new Customer(),resultSet);
+                return  customer;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

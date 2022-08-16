@@ -2,8 +2,11 @@ package util;
 
 import model.Address;
 import model.Customer;
+import model.Discount;
+import model.Order;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 public class DBUtil {
     private static DBUtil instance;
@@ -33,6 +36,10 @@ public class DBUtil {
                     preparedStatement.setLong(i + 1, (Long) args[i]);
                 } else if (args[i] instanceof Integer) {
                     preparedStatement.setInt(i + 1, (Integer) args[i]);
+                } else if (args[i] instanceof LocalDate) {
+                    preparedStatement.setObject(i+1,args[i]);
+                } else if (args[i] instanceof Double) {
+                    preparedStatement.setDouble(i+1,(Double) args[i]);
                 } else {
                     System.out.println("MISSING TYPE: " + args[i].getClass());
                 }
@@ -63,10 +70,32 @@ public class DBUtil {
                 int address=resultSet.getInt("ADDRESS_ID");
                 Customer customer= new Customer(id,fullName,phoneNumber,email,address);
                 return  customer;
+        } else if (object instanceof Discount) {
+                int id = resultSet.getInt("DISCOUNT_ID");
+                String title = resultSet.getString("TITLE");
+                String type = resultSet.getString("TYPE");
+                Double discountPrice = resultSet.getDouble("DISCOUNT_PRICE");
+                LocalDate startDate = resultSet.getDate("START_DATE").toLocalDate();
+                LocalDate endDate = resultSet.getDate("END_DATE").toLocalDate();
+                Discount discount = new Discount(id,title,type,discountPrice,startDate,endDate);
+                return  discount;
+        } else if (object instanceof Order) {
+            int id = resultSet.getInt("ORDER_ID");
+            String name = resultSet.getString("NAME");
+            String phoneNumber = resultSet.getString("PHONE_NUMBER");
+            String detailAddress = resultSet.getString("DETAIL_ADDRESS");
+            int total = resultSet.getInt("TOTAL");
+            LocalDate orderDate = resultSet.getDate("ORDER_DATE").toLocalDate();
+            int customerId = resultSet.getInt("CUSTOMER_ID");
+            int addressId = resultSet.getInt("ADDRESS_ID");
+            int discountId = resultSet.getInt("DISCOUNT_ID");
+            Order order= new Order(id, name,phoneNumber,detailAddress,total,orderDate,customerId,addressId,discountId);
+            return  order;
         }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        System.out.println("MISSING TYPE: "+object.getClass());
         return null;
     }
 }
