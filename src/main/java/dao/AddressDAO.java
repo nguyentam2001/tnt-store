@@ -2,6 +2,8 @@ package dao;
 
 import model.Address;
 
-public interface AddressDAO {
-    int save(Address address);
+import java.util.List;
+
+public interface AddressDAO extends  CommonDAO<Address> {
+
 }

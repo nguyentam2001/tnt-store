@@ -13,6 +13,9 @@ public class Order {
     private  int addressId;
     private int discountId;
 
+    public Order() {
+    }
+
     public Order(int orderId, String name, String phoneNumber, String detailAddress,
                  int total, LocalDate orderDate, int customerId, int addressId, int discountId) {
         this.orderId = orderId;

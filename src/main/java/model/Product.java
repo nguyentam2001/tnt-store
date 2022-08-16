@@ -13,6 +13,9 @@ public class Product {
     private LocalDate date;
     private int status;
 
+    public Product() {
+    }
+
     public Product(int productId, String name, String description, long price, double discountPrice, double stock, int sold, LocalDate date, int status) {
         this.productId = productId;
         this.name = name;

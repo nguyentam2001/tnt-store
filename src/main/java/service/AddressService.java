@@ -2,8 +2,8 @@ package service;
 
 import model.Address;
 
-public interface AddressService {
-    boolean save(Address address);
-    int add(Address address);
-    int test();
+import java.util.List;
+
+public interface AddressService extends CommonService<Address> {
+    Address getAddressById(int id);
 }
