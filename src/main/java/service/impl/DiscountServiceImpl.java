@@ -1,3 +1,4 @@
+
 package service.impl;
 
 import dao.DiscountDAO;
@@ -55,3 +56,4 @@ public class DiscountServiceImpl implements DiscountService {
         return discountDAO.getById(id);
     }
 }
+
