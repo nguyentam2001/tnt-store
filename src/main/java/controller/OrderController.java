@@ -4,80 +4,96 @@ package controller;
 import model.Address;
 import model.Order;
 import service.AddressService;
+import service.DiscountService;
 import service.OrderService;
 import service.impl.AddressServiceImpl;
+import service.impl.DiscountServiceImpl;
 import service.impl.OrderServiceImpl;
 import util.Resources;
+import util.Validator;
 import view.CommonView;
 import view.OrderView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class OrderController {
-    private  OrderService orderService;
-    private  Order order;
-    private  static  OrderController instance;
-    private   AddressService addressService;
-
+    private OrderService orderService;
+    private Order order;
+    private static OrderController instance;
+    private AddressService addressService;
+    private DiscountService discountService;
 
     public OrderController() {
         order = new Order();
         orderService = new OrderServiceImpl();
         addressService = new AddressServiceImpl();
-
+        discountService = new DiscountServiceImpl();
     }
 
-    public static   OrderController  getInstance(){
-        return  instance=instance==null?new OrderController():instance;
+    public static OrderController getInstance() {
+        return instance = instance == null ? new OrderController() : instance;
     }
 
-    public  void  menuOrderController(){
-        int pick=0;
+    public void menuOrderController() {
+        int pick = 0;
         do {
             OrderView.printViewOrder();
-            pick=Main.scanner.nextInt();
-            switch (pick){
-                case 1:saveOrderController(); break;
-                case 2:printAllOrderController(); break;
-                case 3:updateOrderController();break;
-                case 4:deleteOrderController(); break;
-                case 5:findOrderByIdController();break;
-                default: break;
+            pick = Main.scanner.nextInt();
+            switch (pick) {
+
+                case 1:
+                    saveOrderController();
+                    break;
+                case 2:
+                    printAllOrderController();
+                    break;
+                case 3:
+                    updateOrderController();
+                    break;
+                case 4:
+                    deleteOrderController();
+                    break;
+                case 5:
+                    findOrderByIdController();
+                    break;
+                default:
+                    break;
             }
 
-        }while (pick!=0);
+        } while (pick != 0);
     }
 
     private void findOrderByIdController() {
     }
 
-    public  void saveOrderController() {
+    public void saveOrderController() {
         boolean isCon;
         do {
             order = OrderView.inputOrder(addressService.findAll());
-            boolean result=orderService.save(order);
-            if(result){
+            boolean result = orderService.save(order);
+            if (result) {
                 CommonView.getInstance().displayMessage(Resources.ADD_SUCCESS_MSG);
-            }else {
+            } else {
                 CommonView.getInstance().displayMessage(Resources.ADD_FAIL_MSG);
             }
-            isCon=Main.isContinue();
-        }while (isCon);
+            isCon = Main.isContinue();
+        } while (isCon);
 
     }
 
-    public void  deleteOrderController(){
-        int id=CommonView.getInstance().inputId("Order");
-        boolean result= orderService.delete(id);
-        if(result){
+    public void deleteOrderController() {
+        int id = CommonView.getInstance().inputId("Order");
+        boolean result = orderService.delete(id);
+        if (result) {
             CommonView.getInstance().displayMessage(Resources.DELETE_SUCCESS_MSG);
-        }else{
+        } else {
             CommonView.getInstance().displayMessage(Resources.DELETE_FAIL_MSG);
         }
     }
 
-    public void printAllOrderController(){
+    public void printAllOrderController() {
         List<Order> orders = orderService.findAll();
         OrderView.titleOrder();
         for (Order order :
@@ -87,22 +103,39 @@ public class OrderController {
         OrderView.printLineOrder();
     }
 
-    public  void  updateOrderController(){
+    public void updateOrderController() {
         //nhập id muốn update
-        boolean isCon=true;
+        boolean isCon = true;
 
         do {
-            int id=CommonView.getInstance().inputId("Order");
+            int id = CommonView.getInstance().inputId("Order");
             order = OrderView.inputOrder(addressService.findAll());
-            boolean result= orderService.update(id,order);
-            if(result){
+            boolean result = orderService.update(id, order);
+            if (result) {
                 CommonView.getInstance().displayMessage(Resources.UPDATE_SUCCESS_MSG);
-            }else{
+            } else {
                 CommonView.getInstance().displayMessage(Resources.UPDATE_FAIL_MSG);
             }
-            isCon=Main.isContinue();
-        }while (isCon);
+            isCon = Main.isContinue();
+        } while (isCon);
 
     }
 
+    public void getOrderByPhoneController() {
+        System.out.println("Enter phone number");
+        String phone = Validator.getInstance().phoneValidate();
+        List<Order> orders = orderService.getOrdersByPhone(phone);
+        printLimitedOrderController(orders);
+    }
+
+    public  void printLimitedOrderController(List<Order> orders) {
+        CommonView.getInstance().printLineLimit(116);
+        CommonView.getInstance().printTitleLimit( "ORDER_ID","NAME","ORDER_DATE","TOTAL","DETAIL_ADDRESS");
+        CommonView.getInstance().printLineLimit(116);
+        for (Order order :
+                orders) {
+            CommonView.getInstance().printLimit(order.getOrderId(),order.getName(),order.getDetailAddress(),order.getTotal(),order.getOrderDate());
+        }
+        CommonView.getInstance().printLineLimit(116);
+    }
 }

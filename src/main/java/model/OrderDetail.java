@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class OrderDetail {
     private  int cardId;
     private  int quantity;
@@ -8,6 +10,9 @@ public class OrderDetail {
     private  int productId;
 
     public OrderDetail() {
+    }
+    public OrderDetail(int productId){
+        this.productId=productId;
     }
 
     public OrderDetail(int cardId, int quantity, long total, int orderId, int productId) {
@@ -56,5 +61,29 @@ public class OrderDetail {
 
     public void setProductId(int productId) {
         this.productId = productId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderDetail that = (OrderDetail) o;
+        return productId == that.productId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(productId);
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDetail{" +
+                "cardId=" + cardId +
+                ", quantity=" + quantity +
+                ", total=" + total +
+                ", orderId=" + orderId +
+                ", productId=" + productId +
+                '}';
     }
 }

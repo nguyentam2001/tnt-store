@@ -69,4 +69,5 @@ public class Discount {
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
+
 }

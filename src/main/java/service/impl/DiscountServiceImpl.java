@@ -50,5 +50,10 @@ public class DiscountServiceImpl implements DiscountService {
         }
         return false;
     }
+
+    @Override
+    public Discount getDiscountById(int id) {
+        return discountDAO.getById(id);
+    }
 }
 

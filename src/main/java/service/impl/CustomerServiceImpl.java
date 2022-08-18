@@ -34,6 +34,8 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 
+
+
     @Override
     public boolean delete(int id) {
         return customerDAO.delete(id) > 0;
@@ -70,10 +72,16 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer getCustomerByPhone(String phone) {
+
         Customer customer= customerDAO.getCustomerByPhone(phone);
         if(customer==null){
-            CommonView.getInstance().displayMessage(Resources.CUSTOMER_NOT_EXIST+"with phone = "+phone);
+            CommonView.getInstance().displayMessage(Resources.CUSTOMER_NOT_EXIST+" with phone = "+phone);
         }return  customer;
+    }
+
+    @Override
+    public int getCustomerIdSave(Customer customer) {
+        return customerDAO.save(customer);
     }
 
 

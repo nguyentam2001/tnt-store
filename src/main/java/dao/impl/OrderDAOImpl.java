@@ -17,13 +17,15 @@ public class OrderDAOImpl implements OrderDAO {
     public int save(Order order) {
         try (Connection connection = DBUtil.getInstance().getConnection()) {
             String sql = Resources.INSERT_ORDER;
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement = DBUtil.getInstance().statementBinding(preparedStatement,
                     order.getName(),order.getPhoneNumber(),order.getDetailAddress(),
                     order.getTotal(),order.getOrderDate(),order.getCustomerId(),
                     order.getAddressId(),order.getDiscountId());
-            if (preparedStatement != null) {
-                return preparedStatement.executeUpdate();
+            preparedStatement.execute();
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            if(rs.next()){
+                return  rs.getInt(1);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -97,5 +99,23 @@ public class OrderDAOImpl implements OrderDAO {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    @Override
+    public List<Order> getOrderByPhone(String phone) {
+        try (Connection connection = DBUtil.getInstance().getConnection()) {
+            String sql = Resources.SELECT_ALL_ORDER_BY_PHONE+phone;
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            List<Order> orders = new ArrayList<>();
+            while (resultSet.next()) {
+                Order order = (Order) DBUtil.getInstance().columnBinding(new Order(), resultSet);
+                orders.add(order);
+            }
+            return orders;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
