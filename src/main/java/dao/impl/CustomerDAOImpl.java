@@ -13,11 +13,13 @@ public class CustomerDAOImpl implements CustomerDAO {
     public int save(Customer customer) {
         try(Connection connection= DBUtil.getInstance().getConnection()){
             String sql= Resources.INSERT_CUSTOMER;
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            PreparedStatement preparedStatement = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             preparedStatement= DBUtil.getInstance().statementBinding( preparedStatement,customer.getFullName()
                     ,customer.getPhoneNumber(),customer.getEmail(),customer.getAddressId());
-            if(preparedStatement!=null){
-                return  preparedStatement.executeUpdate();
+            preparedStatement.execute();
+            ResultSet resultSet= preparedStatement.getGeneratedKeys();
+            if(resultSet.next()){
+                return  resultSet.getInt(1);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -40,7 +42,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         try (Connection connection = DBUtil.getInstance().getConnection()) {
             String sql = Resources.SELECT_ALL_CUSTOMER;
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+            ResultSet resultSet= statement.executeQuery(sql);
             List<Customer> customers = new ArrayList<>();
             while (resultSet.next()) {
                 Customer customer = (Customer) DBUtil.getInstance().columnBinding(new Customer(), resultSet);

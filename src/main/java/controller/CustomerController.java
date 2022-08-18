@@ -86,14 +86,24 @@ public class CustomerController {
         CustomerView.getInstance().printLineCustomer();
     }
 
-    private void saveCustomerController() {
+    public int saveCustomerController() {
         //get list address
         List<Address> addresses= addressService.findAll();
         Customer customer= CustomerView.getInstance().inputCustomer(addresses);
-        boolean result = customerService.save(customer);
-        if(result){
+        int result = customerService.getCustomerIdSave(customer);
+        if(result>0){
             CommonView.getInstance().displayMessage(Resources.ADD_SUCCESS_MSG);
         }else
             CommonView.getInstance().displayMessage(Resources.ADD_FAIL_MSG);
+        return  result;
     }
+
+    public  void  printCustomer(Customer customer){
+        CustomerView.getInstance().titleCustomer();
+        Address address = addressService.getAddressById(customer.getAddressId());
+        CustomerView.getInstance().printCustomer(customer, address);
+        CustomerView.getInstance().printLineCustomer();
+    }
+
+
 }

@@ -1,5 +1,7 @@
 package util;
 
+import view.CommonView;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -171,6 +173,14 @@ public class Validator {
             System.out.println("\tYou must input "+Resources.DATE_FORMAT);
             return  inputDate();
         }
+    }
+
+    public  LocalDate currDate(){
+            LocalDate localDate = LocalDate.now();//For reference
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            String date= localDate.format(formatter);
+            return localDate.parse(date,formatter);
+
     }
 
 }

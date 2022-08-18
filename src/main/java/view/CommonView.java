@@ -1,5 +1,6 @@
 package view;
 
+import java.time.LocalDate;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -22,7 +23,7 @@ public class CommonView {
 
     public void mainMenu() {
         System.out.println("==================WELCOME TO TNT STORE================");
-        System.out.println("1. Order product ");
+        System.out.println("1. TNTStore frontend ");
         System.out.println("2. Login width admin ");
         System.out.println("======================================================");
     }
@@ -67,4 +68,41 @@ public class CommonView {
         System.out.println("0. Exit");
         System.out.println("======================================================");
     }
+
+    public  void printTitleLimit(String ...args){
+        String tmpl="";
+        for (int i = 0; i < args.length; i++) {
+            tmpl="| %20s ";
+            if(i==args.length-1)
+                tmpl+="|\n";
+            System.out.printf(tmpl,args[i]);
+        }
+
+    }
+
+    public  void printLineLimit(int length){
+        String tmp="";
+        for (int i = 0; i < length; i++) {
+            tmp+="-";
+        }
+        System.out.println(tmp);
+    }
+
+    public  void printLimit(Object ...args){
+        String tmpl="";
+        for (int i = 0; i < args.length; i++) {
+            tmpl="| %20s ";
+            if(args[i] instanceof Integer
+                    ||args[i] instanceof LocalDate
+                    ||args[i] instanceof String
+                    ||args[i] instanceof Long
+                    ||args[i] instanceof Double){
+                if(i==args.length-1)
+                    tmpl+="|\n";
+                System.out.printf(tmpl,args[i]);
+            }
+        }
+
+    }
+
 }

@@ -49,4 +49,14 @@ public class OrderServiceImpl implements OrderService {
         }
         return false;
     }
+
+    @Override
+    public int saveAndGetOrderId(Order order) {
+        return orderDAO.save(order);
+    }
+
+    @Override
+    public List<Order> getOrdersByPhone(String phone) {
+        return orderDAO.getOrderByPhone(phone);
+    }
 }

@@ -99,4 +99,9 @@ public class Product {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return String.format("| %10d | %15s | %15d | %15.2f | %15d | %15.2f | %15s |",getProductId(),getName(),getPrice(),getDiscountPrice(),getSold(),getStock(),getStatus()==1?"stocking":"Out of stock");
+    }
 }

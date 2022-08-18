@@ -1,11 +1,15 @@
 package view;
 
+import controller.CustomerOrderController;
+import controller.DiscountController;
 import model.Address;
+import model.Discount;
 import model.Order;
 import util.Validator;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class OrderView {
@@ -13,7 +17,8 @@ public class OrderView {
     private static Order order= new Order();;
 
     public static Order inputOrder(List<Address> addresses) {
-        System.out.print("\tEnter name: ");
+
+        System.out.print("\tEnter order name: ");
         order.setName(scanner.nextLine());
         System.out.print("\tEnter phone number: ");
         order.setPhoneNumber(scanner.nextLine());
@@ -26,12 +31,12 @@ public class OrderView {
         order.setDetailAddress(scanner.nextLine());
         System.out.print("\tEnter total: ");
         order.setTotal( scanner.nextInt());
-        System.out.print("\tEnter local date: ");
-        order.setOrderDate(Validator.getInstance().inputDate());
+        order.setOrderDate(Validator.getInstance().currDate());
         System.out.print("\tEnter customerID: ");
         order.setCustomerId(scanner.nextInt());
         scanner.nextLine();
         System.out.print("\tEnter discountID: ");
+        DiscountController.getInstance().printAllDiscountController();
         order.setDiscountId(scanner.nextInt());
         scanner.nextLine();
         return order;
@@ -54,6 +59,7 @@ public class OrderView {
         printLineOrder();
     }
 
+
     public  static  void  printLineOrder(){
         System.out.println("--------------------------------------------------------------------" +
                 "------------------------------------" +
@@ -64,10 +70,11 @@ public class OrderView {
 
 
     public static void printOrder(Order order) {
-        System.out.printf("| %10d | %15s | %15s | %15s | %15s | %35s | %15s | %15s | %15s |\n", order.getOrderId()
+        System.out.printf("| %10s | %15s | %15s | %15s | %15s | %35s | %15s | %15s | %15s |\n", order.getOrderId()
                 ,order.getName(),order.getPhoneNumber()
         ,order.getOrderDate(),order.getTotal(),order.getDetailAddress(),order.getCustomerId(),
                 order.getAddressId(),order.getDiscountId());
     }
+
 
 }

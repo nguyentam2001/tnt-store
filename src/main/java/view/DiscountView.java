@@ -4,10 +4,11 @@ import model.Discount;
 import util.Validator;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 public class DiscountView {
-    private static Scanner scanner=new Scanner(System.in);;
+    private static Scanner scanner=new Scanner(System.in);
     private static Discount discount= new Discount();;
 
     public static Discount inputDiscount() {
