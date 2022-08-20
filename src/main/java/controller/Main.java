@@ -53,31 +53,31 @@ public class Main {
     }
 
     public static void managementMenuController() {//các chức năng quan lý
-        if(Validator.getInstance().Login()){
-        int pick = 0;
-        do {
+        if (Validator.getInstance().Login()) {
+            int pick = 0;
+            do {
 
-            CommonView.getInstance().managementMenuMenu();
-            pick = scanner.nextInt();
-            switch (pick) {
-                case 1:
-                    AddressController.getInstance().menuAddressController();
-                    break;
-                case 2:
-                    CustomerController.getInstance().customerMenuController();
-                    break;
-                case 3:
-                    DiscountController.getInstance().menuDiscountController();
-                    break;
-                case 4:
-                    OrderController.getInstance().menuOrderController();
-                    break;
-                case 6:
-                    ProductController.getInstance().productMenuController();
-                    break;
-            }
-        } while (pick != 0);
-         }
+                CommonView.getInstance().managementMenuMenu();
+                pick = scanner.nextInt();
+                switch (pick) {
+                    case 1:
+                        AddressController.getInstance().menuAddressController();
+                        break;
+                    case 2:
+                        CustomerController.getInstance().customerMenuController();
+                        break;
+                    case 3:
+                        DiscountController.getInstance().menuDiscountController();
+                        break;
+                    case 4:
+                        OrderController.getInstance().menuOrderController();
+                        break;
+                    case 6:
+                        ProductController.getInstance().productMenuController();
+                        break;
+                }
+            } while (pick != 0);
+        }
     }
 
     public static boolean isContinue() {

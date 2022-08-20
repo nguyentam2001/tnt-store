@@ -26,7 +26,7 @@ public class AddressController {
     public void menuAddressController() {
         int pick = 0;
         do {
-            CommonView.getInstance().printSubMenu("address");
+            CommonView.getInstance().printSubMenu(Resources.ADDRESS_TITLE);
             pick = Main.scanner.nextInt();
             switch (pick) {
                 case 1:
@@ -66,7 +66,7 @@ public class AddressController {
     }
 
     public void deleteAddressController() {
-        int id = CommonView.getInstance().inputId("Address");
+        int id = CommonView.getInstance().inputId(Resources.ADDRESS_TITLE);
         boolean result = addressService.delete(id);
         if (result) {
             CommonView.getInstance().displayMessage(Resources.DELETE_SUCCESS_MSG);
@@ -84,7 +84,7 @@ public class AddressController {
         //nhập id muốn update
         boolean isCon = true;
         do {
-            int id = CommonView.getInstance().inputId("Address");
+            int id = CommonView.getInstance().inputId(Resources.ADDRESS_TITLE);
             address = AddressView.inputAddress();
             boolean result = addressService.update(id, address);
             if (result) {

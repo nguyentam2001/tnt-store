@@ -1,12 +1,12 @@
 package model;
 
 public class Address {
-    private  int addressId;
-    private  String city;
-    private  String district;
-    private  String subDistrict;
-    private  String postalCode;
-    private  long   deliveryFree;
+    private int addressId;
+    private String city;
+    private String district;
+    private String subDistrict;
+    private String postalCode;
+    private long deliveryFree;
 
     public Address() {
     }
@@ -70,6 +70,6 @@ public class Address {
 
     @Override
     public String toString() {
-        return String.format("| %6d | %10s | %10d |",getAddressId(),getCity(),getDeliveryFree());
+        return String.format("| %6d | %10s | %10d |", getAddressId(), getCity(), getDeliveryFree());
     }
 }

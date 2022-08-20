@@ -30,7 +30,7 @@ public class CustomerController {
     public void customerMenuController() {
         int pick = 0;
         do {
-            CommonView.getInstance().printSubMenu("customer");
+            CommonView.getInstance().printSubMenu(Resources.CUSTOMER_TITLE);
             pick = Main.scanner.nextInt();
             switch (pick) {
                 case 1:
@@ -54,7 +54,7 @@ public class CustomerController {
 
 
     private void deleteCustomerController() {
-        int id = CommonView.getInstance().inputId("customer");
+        int id = CommonView.getInstance().inputId(Resources.CUSTOMER_TITLE);
         Customer customer = customerService.getCustomerById(id);
         if (customer != null) {
             customerService.delete(id);
@@ -63,7 +63,7 @@ public class CustomerController {
     }
 
     private void updateCustomerController() {
-        int id = CommonView.getInstance().inputId("customer");
+        int id = CommonView.getInstance().inputId(Resources.CUSTOMER_TITLE);
         Customer customer = customerService.getCustomerById(id);
         if (customer != null) {
             List<Address> addresses = addressService.findAll();
@@ -80,7 +80,7 @@ public class CustomerController {
     private void printAllCustomerController() {
         List<Customer> customers = customerService.findAll();
         CommonView.getInstance().printLineLimit(116);
-        CommonView.getInstance().printTitleLimit("CUSTOMER_ID", "CUSTOMER_NAME", "EMAIL", "PHONE_NUMBER", "CITY_ADDRESS");
+        CommonView.getInstance().printTitleLimit(Resources.CUSTOMER_LIMIT_TITLES);
         CommonView.getInstance().printLineLimit(116);
         for (Customer customer :
                 customers) {
@@ -106,7 +106,7 @@ public class CustomerController {
     public void printCustomer(Customer customer) {
         Address address = addressService.getAddressById(customer.getAddressId());
         CommonView.getInstance().printLineLimit(116);
-        CommonView.getInstance().printTitleLimit("CUSTOMER_ID", "CUSTOMER_NAME", "EMAIL", "PHONE_NUMBER", "CITY_ADDRESS");
+        CommonView.getInstance().printTitleLimit(Resources.CUSTOMER_LIMIT_TITLES);
         CommonView.getInstance().printLineLimit(116);
         CommonView.getInstance().printLimit(customer.getCustomerId(), customer.getFullName(), customer.getEmail(),
                 customer.getPhoneNumber(), address.getCity());

@@ -29,23 +29,23 @@ public class CommonView {
     }
 
     public void printSubMenu(String name) {
-        System.out.println("\t============== "+name.toUpperCase()+" ============");
-        System.out.println("\t1. Create new "+name);
-        System.out.println("\t2. Print all "+name);
-        System.out.println("\t3. Update "+name);
-        System.out.println("\t4. delete "+name);
+        System.out.println("\t============== " + name.toUpperCase() + " ============");
+        System.out.println("\t1. Create new " + name);
+        System.out.println("\t2. Print all " + name);
+        System.out.println("\t3. Update " + name);
+        System.out.println("\t4. delete " + name);
         System.out.println("\t0. Exit to main menu");
         System.out.println("\t===================================");
     }
 
     public int inputId(String name) {
         System.out.print("Enter " + name + " id: ");
-        if(scanner.hasNextInt()){
+        if (scanner.hasNextInt()) {
             int id = scanner.nextInt();
             scanner.nextLine();
             return id;
         }
-       return  inputId(name);
+        return inputId(name);
     }
 
 
@@ -69,37 +69,37 @@ public class CommonView {
         System.out.println("======================================================");
     }
 
-    public  void printTitleLimit(String ...args){
-        String tmpl="";
+    public void printTitleLimit(String... args) {
+        String tmpl = "";
         for (int i = 0; i < args.length; i++) {
-            tmpl="| %20s ";
-            if(i==args.length-1)
-                tmpl+="|\n";
-            System.out.printf(tmpl,args[i]);
+            tmpl = "| %20s ";
+            if (i == args.length - 1)
+                tmpl += "|\n";
+            System.out.printf(tmpl, args[i]);
         }
 
     }
 
-    public  void printLineLimit(int length){
-        String tmp="";
+    public void printLineLimit(int length) {
+        String tmp = "";
         for (int i = 0; i < length; i++) {
-            tmp+="-";
+            tmp += "-";
         }
         System.out.println(tmp);
     }
 
-    public  void printLimit(Object ...args){
-        String tmpl="";
+    public void printLimit(Object... args) {
+        String tmpl = "";
         for (int i = 0; i < args.length; i++) {
-            tmpl="| %20s ";
-            if(args[i] instanceof Integer
-                    ||args[i] instanceof LocalDate
-                    ||args[i] instanceof String
-                    ||args[i] instanceof Long
-                    ||args[i] instanceof Double){
-                if(i==args.length-1)
-                    tmpl+="|\n";
-                System.out.printf(tmpl,args[i]);
+            tmpl = "| %20s ";
+            if (args[i] instanceof Integer
+                    || args[i] instanceof LocalDate
+                    || args[i] instanceof String
+                    || args[i] instanceof Long
+                    || args[i] instanceof Double) {
+                if (i == args.length - 1)
+                    tmpl += "|\n";
+                System.out.printf(tmpl, args[i]);
             }
         }
 

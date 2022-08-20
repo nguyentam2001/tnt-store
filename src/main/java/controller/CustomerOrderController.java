@@ -24,7 +24,7 @@ public class CustomerOrderController {
     private final DiscountService discountService;
     private final OrderDetailService orderDetailService;
     private final OrderService orderService;
-    private  List<OrderDetail> orderDetails;
+    private List<OrderDetail> orderDetails;
     private Order order;
     private OrderDetail orderDetail;
     private int customerId;
@@ -56,7 +56,7 @@ public class CustomerOrderController {
     }
 
     private void getProductPick() {
-        orderDetails=new ArrayList<>();//Khởi tạo một orderdetails mới
+        orderDetails = new ArrayList<>();//Khởi tạo một orderdetails mới
         ProductController.getInstance().printProducts();
         int pick;
         do {
@@ -72,7 +72,7 @@ public class CustomerOrderController {
     }
 
     private void getCustomerInfo() {
-        phoneNumber=Validator.getInstance().phoneValidate();
+        phoneNumber = Validator.getInstance().phoneValidate();
         Customer customer = customerService.getCustomerByPhone(phoneNumber);
         if (customer != null) {
             CustomerController.getInstance().printCustomer(customer);
@@ -104,13 +104,14 @@ public class CustomerOrderController {
         scanner.nextLine();
         return order;
     }
-    public  long getDeliveryFreeByAddressId(int addressId){
-        long deliveryFree=0;
+
+    public long getDeliveryFreeByAddressId(int addressId) {
+        long deliveryFree = 0;
         Address address = addressService.getAddressById(addressId);
-        if(address!=null){
-            deliveryFree=address.getDeliveryFree();
+        if (address != null) {
+            deliveryFree = address.getDeliveryFree();
         }
-        return  deliveryFree;
+        return deliveryFree;
     }
 
     //tính giảm giá
@@ -124,8 +125,8 @@ public class CustomerOrderController {
         order = inputOrder(addresses);
         Discount discount = discountService.getDiscountById(order.getDiscountId());
         order.setTotal(//Tiền hàng và phí ship
-                discountPriceOrderDetailCal(order.getTotal()+getDeliveryFreeByAddressId(order.getAddressId()),
-                discount.getDiscountPrice()));//Tính toán mã giám giá
+                discountPriceOrderDetailCal(order.getTotal() + getDeliveryFreeByAddressId(order.getAddressId()),
+                        discount.getDiscountPrice()));//Tính toán mã giám giá
         int orderId = orderService.saveAndGetOrderId(order);
         saveOrderDetailOrderId(orderId);
     }
@@ -159,7 +160,7 @@ public class CustomerOrderController {
         Product product = productService.getProductById(id);
         if (product != null) {
             if (product.getStock() < quantity) {
-                System.out.println("\tProduct quantity is not enough");
+                System.out.println("\t" + Resources.PRODUCT_NOT_ENOUGH);
             } else {
                 orderDetail.setQuantity(quantity);
                 orderDetail.setProductId(id);
@@ -198,34 +199,34 @@ public class CustomerOrderController {
     }
 
 
-    public void  checkReceipt(){
-        phoneNumber=Validator.getInstance().phoneValidate().trim();
-        Customer customer= customerService.getCustomerByPhone(phoneNumber);
-        if (customer!=null){
-            List<Order> orders= orderService.getOrdersByPhone(phoneNumber);
-            if(orders.size()>0){
-                System.out.println("List order");
+    public void checkReceipt() {
+        phoneNumber = Validator.getInstance().phoneValidate().trim();
+        Customer customer = customerService.getCustomerByPhone(phoneNumber);
+        if (customer != null) {
+            List<Order> orders = orderService.getOrdersByPhone(phoneNumber);
+            if (orders.size() > 0) {
+                System.out.println(Resources.ORDER_TITLE);
                 OrderController.getInstance().printLimitedOrderController(orders);//Hiển thị danh sách hoá đơn
-                System.out.println("List product customer order");
-                for (Order order:
-                     orders) {
-                    orderDetails= orderDetailService.getOrderDetailByOrderId(order.getOrderId());
+                System.out.println(Resources.PRODUCT_ORDER_TITLE);
+                for (Order order :
+                        orders) {
+                    orderDetails = orderDetailService.getOrderDetailByOrderId(order.getOrderId());
                     printOrderDetailController(orderDetails);
                 }
-            }else {
-                System.out.println("Customer is not order");
+            } else {
+                System.out.println(Resources.ORDER_EMPTY);
             }
         }
     }
 
-    public void printOrderDetailController(List<OrderDetail> orderDetails){
+    public void printOrderDetailController(List<OrderDetail> orderDetails) {
         CommonView.getInstance().printLineLimit(70);
-        CommonView.getInstance().printTitleLimit("PRODUCT_NAME","QUANTITY","TOTAL");
+        CommonView.getInstance().printTitleLimit(Resources.ORDER_PRODUCT_TITLES);
         CommonView.getInstance().printLineLimit(70);
-        for (OrderDetail odt:
-             orderDetails) {
-            Product product= productService.getProductById(odt.getProductId());
-            CommonView.getInstance().printLimit(product.getName(),odt.getQuantity(),odt.getTotal());
+        for (OrderDetail odt :
+                orderDetails) {
+            Product product = productService.getProductById(odt.getProductId());
+            CommonView.getInstance().printLimit(product.getName(), odt.getQuantity(), odt.getTotal());
         }
         CommonView.getInstance().printLineLimit(70);
     }

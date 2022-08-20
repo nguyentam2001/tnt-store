@@ -1,4 +1,5 @@
 package service.impl;
+
 import dao.AddressDAO;
 import dao.CustomerDAO;
 import dao.impl.AddressDAOImpl;
@@ -8,6 +9,7 @@ import service.CustomerService;
 import util.Resources;
 import util.Validator;
 import view.CommonView;
+
 import java.util.List;
 
 public class CustomerServiceImpl implements CustomerService {
@@ -33,7 +35,6 @@ public class CustomerServiceImpl implements CustomerService {
             return customerDAO.save(customer) > 0;
         }
     }
-
 
 
     @Override
@@ -63,20 +64,21 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer getCustomerById(int id) {
-        Customer customer= customerDAO.getById(id);
-        if(customer==null){
-            CommonView.getInstance().displayMessage(Resources.CUSTOMER_NOT_EXIST+"with id = "+id);
+        Customer customer = customerDAO.getById(id);
+        if (customer == null) {
+            CommonView.getInstance().displayMessage(Resources.CUSTOMER_NOT_EXIST + "with id = " + id);
         }
-        return  customer;
+        return customer;
     }
 
     @Override
     public Customer getCustomerByPhone(String phone) {
 
-        Customer customer= customerDAO.getCustomerByPhone(phone);
-        if(customer==null){
-            CommonView.getInstance().displayMessage(Resources.CUSTOMER_NOT_EXIST+" with phone = "+phone);
-        }return  customer;
+        Customer customer = customerDAO.getCustomerByPhone(phone);
+        if (customer == null) {
+            CommonView.getInstance().displayMessage(Resources.CUSTOMER_NOT_EXIST + " with phone = " + phone);
+        }
+        return customer;
     }
 
     @Override

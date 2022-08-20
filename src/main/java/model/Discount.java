@@ -3,10 +3,10 @@ package model;
 import java.time.LocalDate;
 
 public class Discount {
-    private  int discountId;
-    private  String title;
-    private  String type;
-    private  double discountPrice;
+    private int discountId;
+    private String title;
+    private String type;
+    private double discountPrice;
     private LocalDate startDate;
     private LocalDate endDate;
 

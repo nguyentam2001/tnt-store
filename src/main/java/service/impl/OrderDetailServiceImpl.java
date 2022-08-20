@@ -7,19 +7,21 @@ import service.OrderDetailService;
 
 import java.util.List;
 
-public class OrderDetailServiceImpl  implements OrderDetailService {
+public class OrderDetailServiceImpl implements OrderDetailService {
     OrderDetailDAO orderDetailDAO;
-    public OrderDetailServiceImpl(){
-        orderDetailDAO= new OrderDetailDAOImpl();
+
+    public OrderDetailServiceImpl() {
+        orderDetailDAO = new OrderDetailDAOImpl();
     }
+
     @Override
     public boolean save(OrderDetail orderDetail) {
-       return orderDetailDAO.save(orderDetail)>0;
+        return orderDetailDAO.save(orderDetail) > 0;
     }
 
     @Override
     public boolean delete(int id) {
-        return orderDetailDAO.delete(id)>0;
+        return orderDetailDAO.delete(id) > 0;
     }
 
     @Override
@@ -29,7 +31,7 @@ public class OrderDetailServiceImpl  implements OrderDetailService {
 
     @Override
     public boolean update(int id, OrderDetail orderDetail) {
-        return orderDetailDAO.update(id,orderDetail)>0;
+        return orderDetailDAO.update(id, orderDetail) > 0;
     }
 
     @Override

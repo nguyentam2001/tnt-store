@@ -1,25 +1,42 @@
 package util;
 
 public final class Resources {
+    //DATABASE
+    public static  final String DB_URL="jdbc:sqlserver://localhost:1433;databaseName=TNT_STORE;";
+    public static final String DB_NAME="sa";
+    public static final String DB_PASS="root";
 
     //Account
     public static final String ACCOUNT = "admin";
     public static final String PASS = "1234";
     //Message
+
     public static final String ADD_SUCCESS_MSG = "Add success";
+    public static final String ADDRESS_TITLE = "Address";
+    public static final String CUSTOMER_TITLE = "Customer";
+    public static final String DISCOUNT_TITLE = "Discount";
+    public static final String PRODUCT_TITLE = "Product";
+    public static final String ORDER_TITLE="Order";
     public static final String ADD_FAIL_MSG = "Add fail";
     public static final String CONTINUE_MSG = "1. Do you want continue";
     public static final String EXIT_MSG = "2. Exit to menu";
     public static final String DELETE_SUCCESS_MSG = "Delete success";
     public static final String DELETE_FAIL_MSG = "Delete fail";
+
+    public static final String PRODUCT_ORDER_TITLE="List product customer order";
+    public static final String ORDER_EMPTY="Order is empty";
     public static final String UPDATE_FAIL_MSG = "Update fail";
     public  static final  String ORDER_SUCCESS="Order success";
     public static final String ORDER_FAIL="Order fail";
+    public static final String PRODUCT_NOT_ENOUGH = "Product quantity is not enough";
     public static final String UPDATE_SUCCESS_MSG = "Update success";
     public static final String ADDRESS_NOT_EXIST = "Address is not exist with id = ";
     public static final String NAME_AND_PHONE_MSG = "Full name of customer or phone number is null";
     public static final String CUSTOMER_NOT_EXIST = "Customer is not exist ";
     public static final String PHONE_IS_EXIST = "Phone number is exist";
+    public static final String[] CUSTOMER_LIMIT_TITLES={"CUSTOMER_ID", "CUSTOMER_NAME", "EMAIL", "PHONE_NUMBER", "CITY_ADDRESS"};
+    public static final String[] ORDER_PRODUCT_TITLES={"PRODUCT_NAME","QUANTITY","TOTAL"};
+    public  static final String[] ORDER_LIMIT_TITLES={"ORDER_ID","NAME","ORDER_DATE","TOTAL","DETAIL_ADDRESS"};
     //Sql
     public static final String INSERT_ADDRESS = "INSERT INTO ADDRESS(CITY,DISTRICT,SUB_DISTRICT,POSTAL_CODE,DELIVERY_FEE)" +
             " VALUES(?,?,?,?,?)";
@@ -80,6 +97,7 @@ public final class Resources {
     public static final String EMAIL_REGEX = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
     public static final String DATE_FORMAT = "yyyy/MM/dd";
     public static final String PHONE_REGEX = "^[0]+[0-9]{9}$";
+
 
 
 }

@@ -19,13 +19,13 @@ public class OrderDAOImpl implements OrderDAO {
             String sql = Resources.INSERT_ORDER;
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement = DBUtil.getInstance().statementBinding(preparedStatement,
-                    order.getName(),order.getPhoneNumber(),order.getDetailAddress(),
-                    order.getTotal(),order.getOrderDate(),order.getCustomerId(),
-                    order.getAddressId(),order.getDiscountId());
+                    order.getName(), order.getPhoneNumber(), order.getDetailAddress(),
+                    order.getTotal(), order.getOrderDate(), order.getCustomerId(),
+                    order.getAddressId(), order.getDiscountId());
             preparedStatement.execute();
             ResultSet rs = preparedStatement.getGeneratedKeys();
-            if(rs.next()){
-                return  rs.getInt(1);
+            if (rs.next()) {
+                return rs.getInt(1);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,8 +72,8 @@ public class OrderDAOImpl implements OrderDAO {
             String sql_select = Resources.SELECT_ORDER_BY_ID + id;
             ResultSet resultSet = statement.executeQuery(sql_select);
             Order order;
-            if(resultSet.next()) {
-                order= (Order) DBUtil.getInstance().columnBinding(new Order(), resultSet);
+            if (resultSet.next()) {
+                order = (Order) DBUtil.getInstance().columnBinding(new Order(), resultSet);
                 return order;
             }
         } catch (Exception e) {
@@ -89,9 +89,9 @@ public class OrderDAOImpl implements OrderDAO {
             String sql = Resources.UPDATE_ORDER;
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement = DBUtil.getInstance().statementBinding(preparedStatement,
-                    order.getName(),order.getPhoneNumber(),order.getDetailAddress(),
-                    order.getTotal(),order.getOrderDate(),order.getCustomerId(),
-                    order.getDiscountId(),order.getAddressId(),id);
+                    order.getName(), order.getPhoneNumber(), order.getDetailAddress(),
+                    order.getTotal(), order.getOrderDate(), order.getCustomerId(),
+                    order.getDiscountId(), order.getAddressId(), id);
             if (preparedStatement != null) {
                 return preparedStatement.executeUpdate();
             }
@@ -104,7 +104,7 @@ public class OrderDAOImpl implements OrderDAO {
     @Override
     public List<Order> getOrderByPhone(String phone) {
         try (Connection connection = DBUtil.getInstance().getConnection()) {
-            String sql = Resources.SELECT_ALL_ORDER_BY_PHONE+phone;
+            String sql = Resources.SELECT_ALL_ORDER_BY_PHONE + phone;
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             List<Order> orders = new ArrayList<>();

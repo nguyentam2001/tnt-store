@@ -100,7 +100,7 @@ public class OrderDetailDAOImpl implements OrderDetailDAO {
             while (resultSet.next()) {
                 orderDetails.add((OrderDetail) DBUtil.getInstance().columnBinding(new OrderDetail(), resultSet));
             }
-            return  orderDetails;
+            return orderDetails;
         } catch (SQLException e) {
             CommonView.getInstance().displayMessage(e.getMessage());
         }

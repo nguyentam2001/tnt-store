@@ -13,9 +13,11 @@ import java.util.List;
 
 public class OrderServiceImpl implements OrderService {
     private OrderDAO orderDAO;
+
     public OrderServiceImpl() {
         orderDAO = new OrderDAOImpl();
     }
+
     @Override
     public boolean save(Order order) {
         if (Validator.getInstance().checkEmpty(order.getName()))

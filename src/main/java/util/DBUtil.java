@@ -14,9 +14,9 @@ public class DBUtil {
 
     public Connection getConnection() {
         try {
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=TNT_STORE;";
-            String username = "sa";
-            String password = "root";
+            String url = Resources.DB_URL;
+            String username = Resources.DB_NAME;
+            String password = Resources.DB_PASS;
             return DriverManager.getConnection(url, username, password);
         } catch (Exception e) {
             e.printStackTrace();
