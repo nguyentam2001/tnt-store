@@ -36,7 +36,7 @@ public class AddressDAOImpl implements AddressDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             return preparedStatement.executeUpdate();
         } catch (SQLException e) {
-          CommonView.getInstance().displayMessage(e.getMessage());
+            CommonView.getInstance().displayMessage(e.getMessage());
         }
         return 0;
     }
@@ -67,8 +67,8 @@ public class AddressDAOImpl implements AddressDAO {
             String sql_select = Resources.SELECT_ADDRESS_BY_ID + id;
             ResultSet resultSet = statement.executeQuery(sql_select);
             Address address;
-           if(resultSet.next()) {
-               address= (Address) DBUtil.getInstance().columnBinding(new Address(), resultSet);
+            if (resultSet.next()) {
+                address = (Address) DBUtil.getInstance().columnBinding(new Address(), resultSet);
                 return address;
             }
         } catch (SQLException e) {

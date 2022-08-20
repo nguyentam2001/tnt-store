@@ -84,7 +84,7 @@ public class OrderController {
     }
 
     public void deleteOrderController() {
-        int id = CommonView.getInstance().inputId("Order");
+        int id = CommonView.getInstance().inputId(Resources.ORDER_TITLE);
         boolean result = orderService.delete(id);
         if (result) {
             CommonView.getInstance().displayMessage(Resources.DELETE_SUCCESS_MSG);
@@ -108,7 +108,7 @@ public class OrderController {
         boolean isCon = true;
 
         do {
-            int id = CommonView.getInstance().inputId("Order");
+            int id = CommonView.getInstance().inputId(Resources.ORDER_TITLE);
             order = OrderView.inputOrder(addressService.findAll());
             boolean result = orderService.update(id, order);
             if (result) {
@@ -121,20 +121,13 @@ public class OrderController {
 
     }
 
-    public void getOrderByPhoneController() {
-        System.out.println("Enter phone number");
-        String phone = Validator.getInstance().phoneValidate();
-        List<Order> orders = orderService.getOrdersByPhone(phone);
-        printLimitedOrderController(orders);
-    }
-
-    public  void printLimitedOrderController(List<Order> orders) {
+    public void printLimitedOrderController(List<Order> orders) {
         CommonView.getInstance().printLineLimit(116);
-        CommonView.getInstance().printTitleLimit( "ORDER_ID","NAME","ORDER_DATE","TOTAL","DETAIL_ADDRESS");
+        CommonView.getInstance().printTitleLimit(Resources.ORDER_LIMIT_TITLES);
         CommonView.getInstance().printLineLimit(116);
         for (Order order :
                 orders) {
-            CommonView.getInstance().printLimit(order.getOrderId(),order.getName(),order.getDetailAddress(),order.getTotal(),order.getOrderDate());
+            CommonView.getInstance().printLimit(order.getOrderId(), order.getName(), order.getDetailAddress(), order.getTotal(), order.getOrderDate());
         }
         CommonView.getInstance().printLineLimit(116);
     }

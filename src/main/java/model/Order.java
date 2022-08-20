@@ -3,14 +3,14 @@ package model;
 import java.time.LocalDate;
 
 public class Order {
-    private  int orderId;
-    private  String name;
-    private  String phoneNumber;
-    private  String detailAddress;
-    private  int total;
-    private  LocalDate orderDate;
-    private  int customerId;
-    private  int addressId;
+    private int orderId;
+    private String name;
+    private String phoneNumber;
+    private String detailAddress;
+    private int total;
+    private LocalDate orderDate;
+    private int customerId;
+    private int addressId;
     private int discountId;
 
     public Order() {

@@ -13,9 +13,11 @@ import java.util.List;
 
 public class DiscountServiceImpl implements DiscountService {
     private DiscountDAO discountDAO;
-    public DiscountServiceImpl(){
+
+    public DiscountServiceImpl() {
         discountDAO = new DiscountDAOImpl();
     }
+
     @Override
     public boolean save(Discount discount) {
         if (Validator.getInstance().checkEmpty(discount.getTitle()))

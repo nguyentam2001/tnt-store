@@ -1,13 +1,11 @@
 package controller;
 
-import model.OrderDetail;
-
-import java.util.List;
 
 public class OrderDetailController {
-    private  static OrderDetailController instance;
-    public   static OrderDetailController getInstance(){
-        return  instance=instance==null?new OrderDetailController():instance;
+    private static OrderDetailController instance;
+
+    public static OrderDetailController getInstance() {
+        return instance = instance == null ? new OrderDetailController() : instance;
     }
 
 }

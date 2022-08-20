@@ -1,14 +1,16 @@
 package model;
 
 public class Customer {
-    private  int customerId;
-    private  String fullName;
-    private  String phoneNumber;
-    private  String email;
-    private  int addressId;
-    public  Customer(){
+    private int customerId;
+    private String fullName;
+    private String phoneNumber;
+    private String email;
+    private int addressId;
+
+    public Customer() {
 
     }
+
     public Customer(int customerId, String fullName, String phoneNumber, String email, int addressId) {
         this.customerId = customerId;
         this.fullName = fullName;

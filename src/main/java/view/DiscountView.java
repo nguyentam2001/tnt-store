@@ -9,8 +9,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class DiscountView {
-    private static Scanner scanner=new Scanner(System.in);
-    private static Discount discount= new Discount();;
+    private static Scanner scanner = new Scanner(System.in);
+    private static Discount discount = new Discount();
+    ;
 
     public static Discount inputDiscount() {
         System.out.print("\tEnter title: ");
@@ -44,7 +45,7 @@ public class DiscountView {
         printLineDiscount();
     }
 
-    public  static  void  printLineDiscount(){
+    public static void printLineDiscount() {
         System.out.println("--------------------------------------------------------------------" +
                 "------------------------------------");
     }
@@ -53,8 +54,8 @@ public class DiscountView {
     public static void printDiscount(Discount discount) {
 
         System.out.printf("| %10d  | %15s | %15s | %15s | %15s | %15s |\n", discount.getDiscountId(),
-                discount.getTitle(),discount.getType(),discount.getDiscountPrice()
-                ,discount.getStartDate(),discount.getEndDate());
+                discount.getTitle(), discount.getType(), discount.getDiscountPrice()
+                , discount.getStartDate(), discount.getEndDate());
     }
 
 

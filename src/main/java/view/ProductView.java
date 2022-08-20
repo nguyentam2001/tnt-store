@@ -1,7 +1,6 @@
 package view;
 
 
-
 import model.Product;
 import util.Validator;
 
@@ -9,25 +8,29 @@ import java.util.Scanner;
 
 public class ProductView {
 
-    private static   ProductView instance;
+    private static ProductView instance;
     private Scanner scanner;
-    public  ProductView(){
-        scanner= new Scanner(System.in);
+
+    public ProductView() {
+        scanner = new Scanner(System.in);
     }
-    public  static ProductView getInstance(){
-        return  instance=instance==null?new ProductView():instance;
+
+    public static ProductView getInstance() {
+        return instance = instance == null ? new ProductView() : instance;
     }
-    public  void  productTitle(){
+
+    public void productTitle() {
         System.out.printf("| %10s | %15s | %15s | %15s | %15s | %15s | %15s |\n",
-                "PRODUCT_ID","[NAME]","PRICE","DISCOUNT_PRICE","SOLD","STOCK","[STATUS]");
+                "PRODUCT_ID", "[NAME]", "PRICE", "DISCOUNT_PRICE", "SOLD", "STOCK", "[STATUS]");
     }
-    public  void  printLine(){
+
+    public void printLine() {
         System.out.println("-------------------------------------------------------" +
                 "--------------------------------------------------------------------");
     }
 
-    public  Product inputProduct() {
-        Product product= new Product();
+    public Product inputProduct() {
+        Product product = new Product();
         System.out.print("\tEnter product name: ");
         product.setName(scanner.nextLine());
         System.out.print("\tEnter description: ");

@@ -3,16 +3,17 @@ package model;
 import java.util.Objects;
 
 public class OrderDetail {
-    private  int cardId;
-    private  int quantity;
-    private  long total;
-    private  int orderId;
-    private  int productId;
+    private int cardId;
+    private int quantity;
+    private long total;
+    private int orderId;
+    private int productId;
 
     public OrderDetail() {
     }
-    public OrderDetail(int productId){
-        this.productId=productId;
+
+    public OrderDetail(int productId) {
+        this.productId = productId;
     }
 
     public OrderDetail(int cardId, int quantity, long total, int orderId, int productId) {

@@ -51,7 +51,8 @@ public class AddressServiceImpl implements AddressService {
         }
         return false;
     }
-    public  Address getAddressById(int id){
-        return  addressDAO.getById(id);
+
+    public Address getAddressById(int id) {
+        return addressDAO.getById(id);
     }
 }

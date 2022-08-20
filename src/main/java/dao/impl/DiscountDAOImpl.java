@@ -19,8 +19,8 @@ public class DiscountDAOImpl implements DiscountDAO {
             String sql = Resources.INSERT_DISCOUNT;
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement = DBUtil.getInstance().statementBinding(preparedStatement,
-                     discount.getTitle(), discount.getType(), discount.getDiscountPrice(),
-                     discount.getStartDate(),discount.getEndDate());
+                    discount.getTitle(), discount.getType(), discount.getDiscountPrice(),
+                    discount.getStartDate(), discount.getEndDate());
             if (preparedStatement != null) {
                 return preparedStatement.executeUpdate();
             }
@@ -69,7 +69,7 @@ public class DiscountDAOImpl implements DiscountDAO {
             String sql_select = Resources.SELECT_DISCOUNT_BY_ID + id;
             ResultSet resultSet = statement.executeQuery(sql_select);
             Discount discount;
-            if(resultSet.next()) {
+            if (resultSet.next()) {
                 discount = (Discount) DBUtil.getInstance().columnBinding(new Discount(), resultSet);
                 return discount;
             }
@@ -87,8 +87,8 @@ public class DiscountDAOImpl implements DiscountDAO {
             String sql = Resources.UPDATE_DISCOUNT;
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement = DBUtil.getInstance().statementBinding(preparedStatement,
-                     discount.getTitle(), discount.getType(), discount.getDiscountPrice(), discount.getStartDate(),
-                    discount.getEndDate(),id);
+                    discount.getTitle(), discount.getType(), discount.getDiscountPrice(), discount.getStartDate(),
+                    discount.getEndDate(), id);
             if (preparedStatement != null) {
                 return preparedStatement.executeUpdate();
             }

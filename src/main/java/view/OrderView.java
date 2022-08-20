@@ -14,8 +14,10 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class OrderView {
-    private static Scanner scanner=new Scanner(System.in);;
-    private static Order order= new Order();;
+    private static Scanner scanner = new Scanner(System.in);
+    ;
+    private static Order order = new Order();
+    ;
 
     public static Order inputOrder(List<Address> addresses) {
 
@@ -31,7 +33,7 @@ public class OrderView {
         System.out.print("\tEnter detail address: ");
         order.setDetailAddress(scanner.nextLine());
         System.out.print("\tEnter total: ");
-        order.setTotal( scanner.nextInt());
+        order.setTotal(scanner.nextInt());
         order.setOrderDate(Validator.getInstance().currDate());
         System.out.print("\tEnter customerID: ");
         order.setCustomerId(scanner.nextInt());
@@ -56,12 +58,12 @@ public class OrderView {
     public static void titleOrder() {
         printLineOrder();
         System.out.printf("| %10s | %15s | %15s | %15s | %15s | %35s | %15s | %15s | %15s |\n", "ORDER_ID", "NAME",
-                "PHONE_NUMBER","ORDER_DATE",  "TOTAL", "DETAIL_ADDRESS", "CUSTOMER_ID", "DISCOUNT_ID","ADDRESS_ID");
+                "PHONE_NUMBER", "ORDER_DATE", "TOTAL", "DETAIL_ADDRESS", "CUSTOMER_ID", "DISCOUNT_ID", "ADDRESS_ID");
         printLineOrder();
     }
 
 
-    public  static  void  printLineOrder(){
+    public static void printLineOrder() {
         System.out.println("--------------------------------------------------------------------" +
                 "------------------------------------" +
                 "------------------------------------" +
@@ -72,9 +74,9 @@ public class OrderView {
 
     public static void printOrder(Order order) {
         System.out.printf("| %10s | %15s | %15s | %15s | %15s | %35s | %15s | %15s | %15s |\n", order.getOrderId()
-                ,order.getName(),order.getPhoneNumber()
-        ,order.getOrderDate(),order.getTotal(),order.getDetailAddress(),order.getCustomerId(),
-                order.getAddressId(),order.getDiscountId());
+                , order.getName(), order.getPhoneNumber()
+                , order.getOrderDate(), order.getTotal(), order.getDetailAddress(), order.getCustomerId(),
+                order.getAddressId(), order.getDiscountId());
     }
 
 
