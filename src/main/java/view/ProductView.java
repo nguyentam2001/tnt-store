@@ -2,7 +2,6 @@ package view;
 
 
 
-import model.Discount;
 import model.Product;
 import util.Validator;
 
@@ -29,24 +28,20 @@ public class ProductView {
 
     public  Product inputProduct() {
         Product product= new Product();
-        System.out.print("Enter name: ");
+        System.out.print("\tEnter product name: ");
         product.setName(scanner.nextLine());
-        System.out.print("Enter description: ");
+        System.out.print("\tEnter description: ");
         product.setDescription(scanner.nextLine());
-        System.out.print("Enter price: ");
-        product.setPrice(scanner.nextLong());
-        scanner.nextLine();
-        System.out.print("Enter discount price: ");
-        product.setDiscountPrice(scanner.nextDouble());
-        scanner.nextLine();
-        System.out.print("Enter stock: ");
-        product.setStock(scanner.nextDouble());
-        System.out.print("Enter sold: ");
-        product.setSold(scanner.nextInt());
+        product.setPrice(Validator.getInstance().moneyValidate("price"));
+        System.out.print("\tEnter discount price: ");
+        product.setDiscountPrice(Validator.getInstance().inputDouble());
+        System.out.print("\tEnter stock: ");
+        product.setStock(Validator.getInstance().inputDouble());
+        System.out.print("\tEnter sold: ");
+        product.setSold(Validator.getInstance().inputInt());
         product.setDate(Validator.getInstance().currDate());
-        System.out.println("Enter status 0-1: ");
-        product.setStatus(scanner.nextInt());
-        scanner.nextLine();
+        System.out.print("\tEnter status 0-1: ");
+        product.setStatus(Validator.getInstance().inputIntLimit01());
         return product;
     }
 

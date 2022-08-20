@@ -34,7 +34,7 @@ public class ProductDAOImpl implements ProductDAO {
             PreparedStatement preparedStatement= connection.prepareStatement(sql);
             return preparedStatement.executeUpdate();
         }catch (SQLException e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return 0;
     }

@@ -14,6 +14,7 @@ public class Main {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
+
         int pick = 0;
         do {
             CommonView.getInstance().mainMenu();
@@ -52,7 +53,7 @@ public class Main {
     }
 
     public static void managementMenuController() {//các chức năng quan lý
-        //if(Validator.getInstance().Login()){
+        if(Validator.getInstance().Login()){
         int pick = 0;
         do {
 
@@ -76,7 +77,7 @@ public class Main {
                     break;
             }
         } while (pick != 0);
-        // }
+         }
     }
 
     public static boolean isContinue() {

@@ -13,6 +13,8 @@ public final class Resources {
     public static final String DELETE_SUCCESS_MSG = "Delete success";
     public static final String DELETE_FAIL_MSG = "Delete fail";
     public static final String UPDATE_FAIL_MSG = "Update fail";
+    public  static final  String ORDER_SUCCESS="Order success";
+    public static final String ORDER_FAIL="Order fail";
     public static final String UPDATE_SUCCESS_MSG = "Update success";
     public static final String ADDRESS_NOT_EXIST = "Address is not exist with id = ";
     public static final String NAME_AND_PHONE_MSG = "Full name of customer or phone number is null";
@@ -57,6 +59,7 @@ public final class Resources {
     public static final String DISCOUNT_NOT_EXIST = "Discount is not exist with id = ";
     public static final String ORDER_NOT_EXIST = "Order is not exist with id = ";
     //Order detail
+
     public static final String INSERT_ORDER_DETAIL = "INSERT INTO ORDER_DETAIL (QUANTITY,TOTAL,ORDER_ID,PRODUCT_ID) " +
             "VALUES(?,?,?,?)";
     public static final String UPDATE_ORDER_DETAIL = "UPDATE ORDER_DETAIL SET QUANTITY = ?, TOTAL = ?, ORDER_ID = ?, " +

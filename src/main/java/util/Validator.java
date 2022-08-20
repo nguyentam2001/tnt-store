@@ -54,7 +54,22 @@ public class Validator {
             System.out.println("Mời bạn nhập lại!");
         }
     }
+    public  int inputIntLimit01(){
 
+        if(scanner.hasNextInt()){
+            int number=scanner.nextInt();
+            if(number ==0 || number==1){
+                scanner.nextLine();
+                return  number;
+            }
+            scanner.nextLine();
+            System.out.println("You must input 0,1");
+            return inputIntLimit01();
+        }
+        scanner.nextLine();
+        System.out.println("You must input 0,1");
+        return inputIntLimit01();
+    }
 
 
     public Double inputDouble()
@@ -141,11 +156,17 @@ public class Validator {
 
     public  Long moneyValidate(String name){
         System.out.print("\tEnter "+name+" >= 0: ");
-        long money = scanner.nextLong();
-        if(money<0){
-            return  moneyValidate(name);
+        if(scanner.hasNextLong()){
+            long  money = scanner.nextLong();
+            if(money<0){
+                return  moneyValidate(name);
+            }
+            scanner.nextLine();
+            return  money;
         }
-        return  money;
+        scanner.nextLine();
+        System.out.println("You must input long");
+        return  moneyValidate(name);
     }
 
     public  boolean Login(){
@@ -180,7 +201,6 @@ public class Validator {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             String date= localDate.format(formatter);
             return localDate.parse(date,formatter);
-
     }
 
 }
