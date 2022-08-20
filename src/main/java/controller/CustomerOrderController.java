@@ -3,10 +3,10 @@ package controller;
 import model.*;
 import service.*;
 import service.impl.*;
+import util.Resources;
 import util.Validator;
 import view.AddressView;
 import view.CommonView;
-import view.CustomerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,46 +14,7 @@ import java.util.Scanner;
 
 public class CustomerOrderController {
     private final Scanner scanner;
-  /*
-I,Chức năng đặt hàng.
-1.Lấy thông tin sản phẩm:[id sản phẩm]
-        - Show danh sách sản phẩm
-        - Chọn sản phẩm (lấy id)
-        - Có chọn tiếp không ?
-            + Nếu chọn tiếp thì
-    a- Chọn sản phẩm giống nhau thì update tăng số lượng,
-    b- Chọn sản phẩm khác nhau thì thêm mới một id sp lưu vào order detail
-2.Lấy thông tin khách hàng:[id khách hàng]
-        - Nhập số điện thoại.
-            - Kiểm tra xem có trong csdl chưa get customer by Phone
-            - Nếu có rồi thì Hiển thị thông tin.
-            - Nếu chưa có thì nhập thông tin mới khách hàng.
-               Addcustomer => return id
-3.Lấy địa chỉ nhận hàng:
-            - Chọn địa chỉ nhận hàng.
-4.Lấy thông tin mã giảm giá:
-            - Chọn mã giảm giá.
-5. Thưc hiện thanh toán
-            - Nhấn nút đặt hàng.
-            - Trừ số lượng sản phẩm đã đặt.
-	        - Hiển thị đặt hàng  thành công
-6: Tạo hoá dơn gồm tất cả các thông tin thu thập đươc
 
-II,  Chức năng xem hoá đơn.
-    -Nhập số điện thoại.
-    -Hiển thị hoá đơn.
-    */
-
-    //1 get new order id.
-    //2 show list product.
-    //3 input phone number then check exist.
-    // -if exist show info.
-    // -else enter customer.
-    //4 pick address
-    //5 pick discount
-    //6 enter button order => (minus product order)
-    //7 show order success.
-    //8 check order
     private static CustomerOrderController instance;
     private List<Address> addresses;
 
@@ -64,11 +25,8 @@ II,  Chức năng xem hoá đơn.
     private final OrderDetailService orderDetailService;
     private final OrderService orderService;
     private  List<OrderDetail> orderDetails;
-
-
     private Order order;
     private OrderDetail orderDetail;
-    private int discountId;
     private int customerId;
     private String phoneNumber;
 
@@ -98,6 +56,7 @@ II,  Chức năng xem hoá đơn.
     }
 
     private void getProductPick() {
+        orderDetails=new ArrayList<>();//Khởi tạo một orderdetails mới
         ProductController.getInstance().printProducts();
         int pick;
         do {
@@ -106,7 +65,6 @@ II,  Chức năng xem hoá đơn.
             System.out.print("\tEnter quantity: ");
             int quantity = scanner.nextInt();
             addOrderDetails(addProductToOrderDetail(id, quantity), orderDetails);
-            printOrderDetails();
             System.out.print("\tEnter 0 to exit: ");
             pick = scanner.nextInt();
             scanner.nextLine();
@@ -129,9 +87,9 @@ II,  Chức năng xem hoá đơn.
         System.out.print("\tEnter order name: ");
         order.setName(scanner.nextLine());
         order.setPhoneNumber(phoneNumber);
-        System.out.println("\tChoose id address");
+        System.out.println("\tChoose delivery address");
         AddressView.printAddress(addresses);
-        System.out.print("\tEnter addressID: ");
+        System.out.print("\tEnter delivery address Id: ");
         order.setAddressId(scanner.nextInt());
         scanner.nextLine();
         System.out.print("\tEnter detail address: ");
@@ -146,9 +104,17 @@ II,  Chức năng xem hoá đơn.
         scanner.nextLine();
         return order;
     }
+    public  long getDeliveryFreeByAddressId(int addressId){
+        long deliveryFree=0;
+        Address address = addressService.getAddressById(addressId);
+        if(address!=null){
+            deliveryFree=address.getDeliveryFree();
+        }
+        return  deliveryFree;
+    }
 
     //tính giảm giá
-    public int discountPriceOrderDetailCal(int total, double percent) {
+    public int discountPriceOrderDetailCal(long total, double percent) {
         return (int) (total - total * 1.0 * percent / 100.0);
     }
 
@@ -157,7 +123,9 @@ II,  Chức năng xem hoá đơn.
         addresses = addressService.findAll();
         order = inputOrder(addresses);
         Discount discount = discountService.getDiscountById(order.getDiscountId());
-        order.setTotal(discountPriceOrderDetailCal(order.getTotal(), discount.getDiscountPrice()));//Tính toán mã giám giá
+        order.setTotal(//Tiền hàng và phí ship
+                discountPriceOrderDetailCal(order.getTotal()+getDeliveryFreeByAddressId(order.getAddressId()),
+                discount.getDiscountPrice()));//Tính toán mã giám giá
         int orderId = orderService.saveAndGetOrderId(order);
         saveOrderDetailOrderId(orderId);
     }
@@ -169,9 +137,9 @@ II,  Chức năng xem hoá đơn.
                 odt.setOrderId(orderId);
                 orderDetailService.save(odt);//lưu lần lượt vào sql
             }
-            CommonView.getInstance().displayMessage("Order success");
+            CommonView.getInstance().displayMessage(Resources.ORDER_SUCCESS);
         } catch (Exception e) {
-            CommonView.getInstance().displayMessage("Order fail");
+            CommonView.getInstance().displayMessage(Resources.ORDER_FAIL);
         }
 
 
@@ -229,9 +197,7 @@ II,  Chức năng xem hoá đơn.
         return false;
     }
 
-    public void printOrderDetails() {
-        orderDetails.forEach(System.out::println);
-    }
+
     public void  checkReceipt(){
         phoneNumber=Validator.getInstance().phoneValidate().trim();
         Customer customer= customerService.getCustomerByPhone(phoneNumber);
